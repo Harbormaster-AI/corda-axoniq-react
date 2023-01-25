@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="gradle-run"  >
+<target name="gradle-run">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+  <if>
+    <os family="unix"/>
+    <then>
+      <exec logError="false" failifexecutionfails="false" failonerror="false" executable="dos2unix">
+        <arg value="C:\harbormaster\tools\apache-tomcat-9.0.63\temp\harbormaster_working_dir\archives\.project.creation.output\project_gen_CordaMktplace_IgOiNm5D/gradlew"/>
+      </exec>
+      <exec logError="false" failifexecutionfails="false" failonerror="false" executable="chmod">
+        <arg value="+x"/>
+        <arg value="C:\harbormaster\tools\apache-tomcat-9.0.63\temp\harbormaster_working_dir\archives\.project.creation.output\project_gen_CordaMktplace_IgOiNm5D/gradlew"/>
+      </exec>
+      <exec logError="false" failifexecutionfails="false" failonerror="false" executable="${basedir.basedir}/gradlew">
+        <arg value="build"/>
+      </exec>
+      <if>
+        <equals arg2="true" arg1="true"/>
+        <then>
+          <exec logError="false" failifexecutionfails="false" failonerror="false" executable="${basedir.basedir}/gradlew">
+            <arg value="gitPush"/>
+          </exec>
+        </then>
+      </if>
+    </then>
+  </if>
+  <if>
+    <os family="windows"/>
+    <then>
+      <exec logError="false" failifexecutionfails="false" failonerror="false" executable="C:\harbormaster\tools\apache-tomcat-9.0.63\temp\harbormaster_working_dir\archives\.project.creation.output\project_gen_CordaMktplace_IgOiNm5D/gradlew.bat">
+        <arg value="build"/>
+      </exec>
+      <if>
+        <equals arg2="true" arg1="true"/>
+        <then>
+          <exec logError="false" failifexecutionfails="false" failonerror="false" executable="C:\harbormaster\tools\apache-tomcat-9.0.63\temp\harbormaster_working_dir\archives\.project.creation.output\project_gen_CordaMktplace_IgOiNm5D/gradlew.bat">
+            <arg value="gitPush"/>
+          </exec>
+        </then>
+      </if>
+    </then>
+  </if>
+</target>
+</project>
